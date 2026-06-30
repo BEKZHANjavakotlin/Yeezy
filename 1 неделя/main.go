@@ -72,4 +72,36 @@ func main() {
 		testing:    true,
 	}
 	fmt.Println(Task3)
+	firstRequest := add(2, 5)
+	fmt.Println(firstRequest)
+	secondRequest := greet("Bekzhan")
+	fmt.Println(secondRequest)
+	thirdRequest := isAdult(22)
+	fmt.Println(thirdRequest)
+	firstDivide, err := divide(8, 2)
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println(firstDivide)
+	secondDivide, err := divide(8, 0)
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println(secondDivide)
+
+	min, max := minMax([]int{1, 2, 3, 4, 5, 6, 7})
+	fmt.Println(min, max)
+	area, perimeter := circleStats(5.0)
+	fmt.Println(area, perimeter)
+	convert, err := parsenAndDouble("21")
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println(convert)
+	convert2, err2 := parsenAndDouble("abc")
+	if err2 != nil {
+		fmt.Println(err2)
+	}
+	fmt.Println(convert2)
+
 }
