@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"time"
+	"week1/models"
 )
 
 func main() {
@@ -102,7 +102,10 @@ func main() {
 	if err2 != nil {
 		fmt.Println(err2)
 	}
-	fmt.Println(convert2) */
+	fmt.Println(convert2)
+
+
+
 	hours := [5]int{1, 2, 3, 4, 5}
 	fmt.Println(hours)
 	fmt.Println(hours[2])
@@ -124,6 +127,31 @@ func main() {
 	fmt.Println(start)
 	time.Sleep(time.Second)
 	elapsed := time.Since(start)
-	fmt.Println(elapsed)
+	fmt.Println(elapsed)*/
+
+	hoursPerTask := map[string]int{
+		"разработка": 5,
+		"ревью":      2,
+		"митинг":     1,
+	}
+	fmt.Println(hoursPerTask)
+	delete(hoursPerTask, "митинг")
+	fmt.Println(hoursPerTask)
+	value1, ok1 := hoursPerTask["разработка"]
+	if ok1 {
+		fmt.Println("найдено:", value1)
+	} else {
+		fmt.Println("Ключ не найден")
+	}
+	value2, ok2 := hoursPerTask["митинг"]
+	if ok2 {
+		fmt.Println("найдено:", value2)
+	} else {
+		fmt.Println("Ключ не найден")
+	}
+	t := models.Task{Title: "разработка", Hours: 3.5}
+	fmt.Println(t.Summary())
+	t.Complete()
+	fmt.Println(t.Complete())
 
 }
