@@ -2,11 +2,11 @@ package main
 
 import (
 	"fmt"
-	"strconv"
+	"time"
 )
 
 func main() {
-	var myInt int = 777
+	/* var myInt int = 777
 	var myFloat float64 = 777.7
 	var myString string = "sevensevenseven"
 	var myBool bool = true
@@ -102,6 +102,28 @@ func main() {
 	if err2 != nil {
 		fmt.Println(err2)
 	}
-	fmt.Println(convert2)
+	fmt.Println(convert2) */
+	hours := [5]int{1, 2, 3, 4, 5}
+	fmt.Println(hours)
+	fmt.Println(hours[2])
+	fmt.Println(len(hours))
+	tasks := make([]string, 0, 3)
+	tasks = append(tasks, "утреннее совещание", "code review", "деплой")
+	fmt.Println(tasks, len(tasks), cap(tasks))
+	backup := make([]string, len(tasks))
+	copy(backup, tasks)
+	fmt.Println(backup)
+	fmt.Println(backup[:2])
+	var total int
+	for index, _ := range tasks {
+		fmt.Println(tasks[index])
+		total += len(tasks[index])
+		fmt.Println(total)
+	}
+	start := time.Now()
+	fmt.Println(start)
+	time.Sleep(time.Second)
+	elapsed := time.Since(start)
+	fmt.Println(elapsed)
 
 }
