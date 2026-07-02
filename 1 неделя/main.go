@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"week1/models"
 )
@@ -157,4 +158,22 @@ func main() {
 	models.Reset(&t)
 	entry := models.NewTimeEntry("разработка")
 	fmt.Println(entry.Task)
+	fmt.Println(getTaskStatus(1.0))
+	fmt.Println(getTaskStatus(4.0))
+	fmt.Println(getTaskStatus(8.0))
+	fmt.Println(getDayType("пн"))
+	fmt.Println(getDayType("вс"))
+	fmt.Println(getDayType("день"))
+	tasks := []string{"разработка", "ревью", "митинг", "деплой"}
+	for index, task := range tasks {
+		fmt.Println(index+1, task)
+	}
+	fmt.Println(validateHours(1.0))
+	fmt.Println(validateHours(45.9))
+	err := validateHours(-1.0)
+	if errors.Is(err, ErrNegativeHours) {
+		fmt.Println("поймали отрицательные часы")
+	}
+	openReport()
+
 }
