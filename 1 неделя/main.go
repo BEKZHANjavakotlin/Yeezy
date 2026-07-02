@@ -151,7 +151,10 @@ func main() {
 	}
 	t := models.Task{Title: "разработка", Hours: 3.5}
 	fmt.Println(t.Summary())
+	fmt.Println(t.Done)
 	t.Complete()
 	fmt.Println(t.Complete())
-
+	models.Reset(&t)
+	entry := models.NewTimeEntry("разработка")
+	fmt.Println(entry.Task)
 }
