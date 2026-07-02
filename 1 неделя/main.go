@@ -1,9 +1,11 @@
 package main
 
 import (
-	"errors"
 	"fmt"
+	"os"
+	"time"
 	"week1/models"
+	"week1/storage"
 )
 
 func main() {
@@ -128,7 +130,7 @@ func main() {
 	fmt.Println(start)
 	time.Sleep(time.Second)
 	elapsed := time.Since(start)
-	fmt.Println(elapsed)*/
+	fmt.Println(elapsed)
 
 	hoursPerTask := map[string]int{
 		"разработка": 5,
@@ -174,6 +176,47 @@ func main() {
 	if errors.Is(err, ErrNegativeHours) {
 		fmt.Println("поймали отрицательные часы")
 	}
-	openReport()
+	openReport()*/
+	switch os.Args[1] {
+	case "старт":
+		entry := models.NewTimeEntry(os.Args[2])
+		entries, err := storage.LoadEntries()
+		if err != nil {
+			fmt.Println(err)
+		}
+		entries = append(entries, *entry)
+		storage.SaveEntries(entries)
+		fmt.Println("Начато:", entry.Task)
+		return
+	case "стоп":
+		data, err := storage.LoadEntries()
+		if err != nil {
+			fmt.Println(err)
+		}
+		for index, entry := range data {
+			if entry.IsRunning == true {
+				data[index].EndTime = time.Now()
+				data[index].Duration = data[index].EndTime.Sub(data[index].StartTime)
+				data[index].IsRunning = false
+
+			}
+
+		}
+		storage.SaveEntries(data)
+		fmt.Println("остановлено")
+		return
+	case "отчет":
+		data, err := storage.LoadEntries()
+		if err != nil {
+			fmt.Println(err)
+		}
+		for _, entry := range data {
+			fmt.Println(entry.Task, entry.Duration)
+		}
+		storage.SaveEntries(data)
+		return
+	default:
+		return
+	}
 
 }
